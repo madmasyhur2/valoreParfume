@@ -18,4 +18,8 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/cek-tarif-post', function () {
+    return view('pricelist');
+});
+
 Route::get('/debug', [HomeController::class, 'index']);
