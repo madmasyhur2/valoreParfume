@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PriceListController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +21,7 @@ Route::get('/regency/{province_id}', [HomeController::class, 'getRegency']);
 Route::get('/district/{regency_id}', [HomeController::class, 'getDistrict']);
 Route::get('/village/{district_id}', [HomeController::class, 'getVillage']);
 
-Route::get('/cek-tarif-post', function () {
-    return view('pricelist');
-});
+Route::post('/pricelist', [PriceListController::class, 'store']);
 
 Route::get('/debug', [HomeController::class, 'index']);
 

@@ -14,9 +14,15 @@
             <h1 class="text-2xl font-bold mb-4">Hasil Cek Tarif</h1>
             <div class="mb-4">
                 <h2 class="text-xl font-semibold mb-2">Detail Pengiriman</h2>
-                <p><strong>Asal:</strong> Jakarta</p>
-                <p><strong>Tujuan:</strong> Surabaya</p>
-                <p><strong>Berat (Gram):</strong> 2000</p>
+                <p>Provinsi Asal: {{ $data['province_origin'] }}</p>
+                <p>Kabupaten/Kota Asal: {{ $data['regency_origin'] }}</p>
+                <p>Kecamatan Asal: {{ $data['district_origin'] }}</p>
+                <p>Kelurahan Asal: {{ $data['village_origin'] }}</p>
+                <p>Provinsi Tujuan: {{ $data['province_destination'] }}</p>
+                <p>Kabupaten/Kota Tujuan: {{ $data['regency_destination'] }}</p>
+                <p>Kecamatan Tujuan: {{ $data['district_destination'] }}</p>
+                <p>Kelurahan Tujuan: {{ $data['village_destination'] }}</p>
+                <p>Berat: {{ $data['weight'] }}</p>
             </div>
         </div>
         <div class="">
