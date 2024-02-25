@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PriceListController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,8 +22,10 @@ Route::get('/regency/{province_id}', [HomeController::class, 'getRegency']);
 Route::get('/district/{regency_id}', [HomeController::class, 'getDistrict']);
 Route::get('/village/{district_id}', [HomeController::class, 'getVillage']);
 
-Route::post('/pricelist', [PriceListController::class, 'index']);
+Route::get('/admin/shippings', [AdminController::class, 'index'])->name('admin.shippings');
+Route::get('/admin/shippings/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+Route::put('/admin/shippings/{id}', [AdminController::class, 'update'])->name('admin.update');
 
-Route::get('/admin/pricing', 'AdminPricingController@index')->name('admin.pricing');
+
 Route::post('/admin/pricing/update', 'AdminPricingController@update')->name('admin.pricing.update');
 

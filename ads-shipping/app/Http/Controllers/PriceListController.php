@@ -38,6 +38,7 @@ class PriceListController extends Controller
 
         $fee = $this->calculateFee($weight, $distance);
         $deliveryTime = $this->calculateDeliveryTime($distance);
+
         $shipping = $this->storeShippingData($distance, $deliveryTime, $fee);
 
         return view('pricelist', compact('data', 'distance', 'fee', 'deliveryTime', 'shipping'));
@@ -47,12 +48,17 @@ class PriceListController extends Controller
     {
         $shipping = new Shipping();
         $shipping->distance = $distance;
-        $shipping->deliveryTime = $deliveryTime;
-        $shipping->fee = $fee;
+        $shipping->delivery_time_economy = $deliveryTime['economy'];
+        $shipping->delivery_time_regular = $deliveryTime['regular'];
+        $shipping->delivery_time_express = $deliveryTime['express'];
+        $shipping->fee_economy = $fee['economy'];
+        $shipping->fee_regular = $fee['regular'];
+        $shipping->fee_express = $fee['express'];
         $shipping->save();
-
+    
         return $shipping;
     }
+    
 
     public function calculateDistance($latitude1, $longitude1, $latitude2, $longitude2)
     {

@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shipping', function (Blueprint $table) {
+        Schema::create('shippings', function (Blueprint $table) {
             $table->id();
             $table->integer('distance')->nullable()->default( null );
-            $table->integer('delivery_time');
-            $table->integer('fee');
+            $table->integer('delivery_time_economy');
+            $table->integer('delivery_time_regular');
+            $table->integer('delivery_time_express');
+            $table->integer('fee_economy');
+            $table->integer('fee_regular');
+            $table->integer('fee_express');
             $table->timestamps();
         });
     }
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shipping');
+        Schema::dropIfExists('shippings');
     }
 };
