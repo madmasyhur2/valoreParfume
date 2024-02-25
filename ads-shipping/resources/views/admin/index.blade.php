@@ -20,6 +20,7 @@
         <table class="w-full bg-white border border-gray-200 shadow-md">
             <thead>
                 <tr>
+                    <th class="px-6 py-3 bg-blue-400 text-center text-xs leading-4 font-medium text-gray-900 uppercase tracking-wider">No</th>
                     <th class="px-6 py-3 bg-blue-400 text-center text-xs leading-4 font-medium text-gray-900 uppercase tracking-wider">Distance</th>
                     <th class="px-6 py-3 bg-blue-400 text-center text-xs leading-4 font-medium text-gray-900 uppercase tracking-wider">Delivery Time (Economy)</th>
                     <th class="px-6 py-3 bg-blue-400 text-center text-xs leading-4 font-medium text-gray-900 uppercase tracking-wider">Delivery Time (Regular)</th>
@@ -31,8 +32,9 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
-                @foreach($shippings as $shipping)
+                @foreach($shippings as $index => $shipping)
                     <tr>
+                        <td class="px-6 py-4 bg-white text-center text-base text-gray-800 whitespace-no-wrap">{{ $index + 1 }}</td>
                         <td class="px-6 py-4 bg-white text-center text-base text-gray-800 whitespace-no-wrap">{{ $shipping->distance }} km</td>
                         <td class="px-6 py-4 bg-white text-center text-base text-gray-800 whitespace-no-wrap">{{ $shipping->delivery_time_economy }} hari</td>
                         <td class="px-6 py-4 bg-white text-center text-base text-gray-800 whitespace-no-wrap">{{ $shipping->delivery_time_regular }} hari</td>
