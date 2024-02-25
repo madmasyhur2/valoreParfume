@@ -50,19 +50,19 @@
                         <tr>
                             <td class="border border-gray-300 px-4 py-2">Ekonomi</td>
                             <td class="border border-gray-300 px-4 py-2">{{ $deliveryTime['economy'] }} Hari</td>
-                            <td class="border border-gray-300 px-4 py-2">Rp. {{ number_format($price['economy'], 0, ',', '.') }}</td>
+                            <td class="border border-gray-300 px-4 py-2">Rp. {{ number_format($fee['economy'], 0, ',', '.') }}</td>
                             <td class="border border-gray-300 px-4 py-2">Pengiriman reguler dengan estimasi waktu {{ $deliveryTime['economy'] }} hari.</td>
                         </tr>
                         <tr>
                             <td class="border border-gray-300 px-4 py-2">Reguler</td>
                             <td class="border border-gray-300 px-4 py-2">{{ $deliveryTime['regular'] }} Hari</td>
-                            <td class="border border-gray-300 px-4 py-2">Rp. {{ number_format($price['regular'], 0, ',', '.') }}</td>
+                            <td class="border border-gray-300 px-4 py-2">Rp. {{ number_format($fee['regular'], 0, ',', '.') }}</td>
                             <td class="border border-gray-300 px-4 py-2">Pengiriman reguler dengan estimasi waktu {{ $deliveryTime['regular'] }} hari.</td>
                         </tr>
                         <tr>
                             <td class="border border-gray-300 px-4 py-2">Express</td>
                             <td class="border border-gray-300 px-4 py-2">{{ $deliveryTime['express'] }} Hari</td>
-                            <td class="border border-gray-300 px-4 py-2">Rp. {{ number_format($price['express'], 0, ',', '.') }}</td>
+                            <td class="border border-gray-300 px-4 py-2">Rp. {{ number_format($fee['express'], 0, ',', '.') }}</td>
                             <td class="border border-gray-300 px-4 py-2">Pengiriman ekspres dengan estimasi waktu {{ $deliveryTime['express'] }} hari.</td>
                         </tr>
                     </tbody>

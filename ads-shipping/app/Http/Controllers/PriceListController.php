@@ -8,6 +8,7 @@ use App\Models\Province;
 use App\Models\Regency;
 use App\Models\District;
 use App\Models\Village;
+use App\Models\Shipping;
 
 class PriceListController extends Controller
 {
@@ -35,12 +36,22 @@ class PriceListController extends Controller
         $distance = $this->calculateDistance($villageOriginLatitude, $villageOriginLongitude, $villageDestinationLatitude, $villageDestinationLongitude);
         $weight = $data['weight'];
 
-        $price = $this->calculateFee($weight, $distance);
+        $fee = $this->calculateFee($weight, $distance);
         $deliveryTime = $this->calculateDeliveryTime($distance);
-        
+        $shipping = $this->storeShippingData($distance, $deliveryTime, $fee);
 
-        return view('pricelist', compact('data', 'distance', 'price', 'deliveryTime'));
+        return view('pricelist', compact('data', 'distance', 'fee', 'deliveryTime', 'shipping'));
+    }
 
+    public function storeShippingData($distance, $deliveryTime, $fee)
+    {
+        $shipping = new Shipping();
+        $shipping->distance = $distance;
+        $shipping->deliveryTime = $deliveryTime;
+        $shipping->fee = $fee;
+        $shipping->save();
+
+        return $shipping;
     }
 
     public function calculateDistance($latitude1, $longitude1, $latitude2, $longitude2)
