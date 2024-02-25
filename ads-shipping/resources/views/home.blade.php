@@ -95,6 +95,30 @@
                             <label for="weight" class="mb-2 block text-xl font-bold text-gray-700">Berat (Gram)</label>
                             <input type="text" name="weight" id="weight" value="1000"class="block mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
                         </div>
+
+                        {{-- <div class="flex flex-col my-3">
+                            <label class="inline-flex items-center mt-3">
+                                <input type="radio" class="form-radio" name="shipment_type" value="volume">
+                                <span class="ml-2">Volume</span>
+                            </label>
+                        
+                            <div id="volumeFields" class="flex hidden">
+                                <div class="p-3 mb-2 flex-1">
+                                    <label for="length" class="block text-sm font-medium text-gray-700">Panjang (cm)</label>
+                                    <input type="text" name="length" id="length" class="block mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="100" required>
+                                </div>
+                                <div class="p-3 mb-2 flex-1">
+                                    <label for="width" class="block text-sm font-medium text-gray-700">Lebar (cm)</label>
+                                    <input type="text" name="width" id="width" class="block mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="100" required>
+                                </div>
+                                <div class="p-3 mb-2 flex-1">
+                                    <label for="height" class="block text-sm font-medium text-gray-700">Tinggi (cm)</label>
+                                    <input type="text" name="height" id="height" class="block mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="100" required>
+                                </div>
+                            </div>
+                            
+                        </div> --}}
+
                     </div>
                     
                     <button type="submit" class="flex bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-700 hover:to-green-700 text-white font-semibold mt-4 py-2 px-4 rounded-xl mx-auto w-40 items-center justify-center">
@@ -263,6 +287,26 @@
                 }
             });
         });
+
+        </script>
+
+        <script>
+            document.querySelectorAll('input[name="shipment_type"]').forEach((elem) => {
+                elem.addEventListener('change', function() {
+                    let volumeFields = document.getElementById('volumeFields');
+                    if (this.value === 'volume') {
+                        volumeFields.classList.remove('hidden');
+                        volumeFields.querySelectorAll('input').forEach((input) => {
+                            input.removeAttribute('disabled');
+                        });
+                    } else {
+                        volumeFields.classList.add('hidden');
+                        volumeFields.querySelectorAll('input').forEach((input) => {
+                            input.setAttribute('disabled', 'disabled');
+                        });
+                    }
+                });
+            });
         </script>
 
     </body>

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('province_id');
             $table->string('name');
+            $table->double('latitude')->nullable()->default( null );
+            $table->double('longitude')->nullable( )->default( null );
             $table->foreign('province_id' )->references('id')->on('provinces');
             $table->timestamps();
         });

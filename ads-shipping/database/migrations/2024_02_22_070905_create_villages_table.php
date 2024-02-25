@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('district_id');
             $table->string('name');
+            $table->double('latitude')->nullable()->default( null );
+            $table->double('longitude')->nullable( )->default( null );
+            $table->string('zipcode')->nullable();
             $table->foreign('district_id' )->references('id')->on('districts');
             $table->timestamps();
         });

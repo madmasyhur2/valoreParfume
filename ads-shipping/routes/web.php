@@ -21,8 +21,8 @@ Route::get('/regency/{province_id}', [HomeController::class, 'getRegency']);
 Route::get('/district/{regency_id}', [HomeController::class, 'getDistrict']);
 Route::get('/village/{district_id}', [HomeController::class, 'getVillage']);
 
-Route::post('/pricelist', [PriceListController::class, 'store']);
+Route::post('/pricelist', [PriceListController::class, 'index']);
 
-Route::get('/debug', [HomeController::class, 'index']);
+Route::get('/admin/pricing', 'AdminPricingController@index')->name('admin.pricing');
+Route::post('/admin/pricing/update', 'AdminPricingController@update')->name('admin.pricing.update');
 
-Route::get('/districts',[HomeController::class,'districts'])->name('districts');
