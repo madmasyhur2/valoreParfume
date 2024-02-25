@@ -13,7 +13,7 @@
             <h1 class="text-3xl font-bold my-8 text-center">Cek Harga Ongkir</h1>
             <div class="bg-white rounded-xl p-4 shadow-lg justify-items-center mx-auto w-full sm:w-2/3">
         
-                <form action="/pricelist" method="POST">
+                <form action="/shippings" method="POST">
                     @csrf
                     <div class="flex flex-col my-3">
         

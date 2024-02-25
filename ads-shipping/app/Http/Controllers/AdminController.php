@@ -11,7 +11,7 @@ class AdminController extends Controller
     public function index()
     {
         $shippings = Shipping::all();
-        return view('admin.shippings', compact('shippings'));
+        return view('admin.index', compact('shippings'));
     }
 
     public function edit($id)
@@ -25,6 +25,12 @@ class AdminController extends Controller
         $shipping = Shipping::findOrFail($id);
         $shipping->update($request->all());
         return redirect()->route('admin.shippings')->with('success', 'Shipping data updated successfully');
+    }
+
+    public function destroy($id)
+    {
+        Shipping::destroy($id);
+        return redirect()->route('admin.shippings')->with('success', 'Shipping information deleted successfully!');
     }
 
 }

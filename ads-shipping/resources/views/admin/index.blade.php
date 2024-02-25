@@ -12,7 +12,11 @@
 
     <div class="w-full max-w-7xl mx-auto p-8">
         <h1 class="text-2xl font-bold text-center mb-8">Shipping Information</h1>
-    
+        @if (session()->has('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 mb-4 rounded relative" role="alert">
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
+        @endif    
         <table class="w-full bg-white border border-gray-200 shadow-md">
             <thead>
                 <tr>
@@ -23,7 +27,7 @@
                     <th class="px-6 py-3 bg-blue-400 text-center text-xs leading-4 font-medium text-gray-900 uppercase tracking-wider">Fee (Economy)</th>
                     <th class="px-6 py-3 bg-blue-400 text-center text-xs leading-4 font-medium text-gray-900 uppercase tracking-wider">Fee (Regular)</th>
                     <th class="px-6 py-3 bg-blue-400 text-center text-xs leading-4 font-medium text-gray-900 uppercase tracking-wider">Fee (Express)</th>
-                    <th class="px-6 py-3 bg-blue-400 text-center text-xs leading-4 font-medium text-gray-900 uppercase tracking-wider">Action</th>
+                    <th colspan="2" class="px-6 py-3 bg-blue-400 text-center text-xs leading-4 font-medium text-gray-900 uppercase tracking-wider">Action</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
@@ -41,11 +45,25 @@
                                 Edit
                             </a>
                         </td>
+                        <td class="px-6 py-4 bg-white text-center text-base text-gray-800 whitespace-no-wrap">
+                            <form action="{{ route('admin.destroy', $shipping->id) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this item?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded shadow">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        <a href="/" class="absolute bottom-4 left-4 bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded shadow flex items-center">
+            <span class="mr-2">Kembali ke Halaman Utama</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+        </a>
     </div>
-    
 </body>
 </html>

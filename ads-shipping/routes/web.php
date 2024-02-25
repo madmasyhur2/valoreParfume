@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PriceListController;
+use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +22,11 @@ Route::get('/regency/{province_id}', [HomeController::class, 'getRegency']);
 Route::get('/district/{regency_id}', [HomeController::class, 'getDistrict']);
 Route::get('/village/{district_id}', [HomeController::class, 'getVillage']);
 
-Route::get('/admin/shippings', [AdminController::class, 'index'])->name('admin.shippings');
-Route::get('/admin/shippings/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
-Route::put('/admin/shippings/{id}', [AdminController::class, 'update'])->name('admin.update');
+Route::post('/shippings', [ShippingController::class, 'index']);
 
+Route::get('/shippings/admin', [AdminController::class, 'index'])->name('admin.shippings');
+Route::get('/shippings/admin/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+Route::put('/shippings/admin/{id}', [AdminController::class, 'update'])->name('admin.update');
+Route::delete('/shippings/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 
-Route::post('/admin/pricing/update', 'AdminPricingController@update')->name('admin.pricing.update');
 

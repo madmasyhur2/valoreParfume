@@ -67,6 +67,12 @@
                         </tr>
                     </tbody>
                 </table>
+                <a href="shippings/admin" class="absolute bottom-4 right-4 bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded shadow flex items-center">
+                    <span class="mr-2">Admin Page</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </a>
             </div>
         </div>
     </div>

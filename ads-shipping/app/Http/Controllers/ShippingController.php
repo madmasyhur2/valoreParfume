@@ -10,7 +10,7 @@ use App\Models\District;
 use App\Models\Village;
 use App\Models\Shipping;
 
-class PriceListController extends Controller
+class ShippingController extends Controller
 {
     public function index()
     {
@@ -41,7 +41,7 @@ class PriceListController extends Controller
 
         $shipping = $this->storeShippingData($distance, $deliveryTime, $fee);
 
-        return view('pricelist', compact('data', 'distance', 'fee', 'deliveryTime', 'shipping'));
+        return view('shipping', compact('data', 'distance', 'fee', 'deliveryTime', 'shipping'));
     }
 
     public function storeShippingData($distance, $deliveryTime, $fee)
