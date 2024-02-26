@@ -11,26 +11,30 @@ class AdminController extends Controller
     public function index()
     {
         $shippings = Shipping::all();
-        return view('admin.index', compact('shippings'));
+        // return view('admin.index', compact('shippings'));
+        return response()->json($shippings);
     }
 
     public function edit($id)
     {
         $shipping = Shipping::findOrFail($id);
-        return view('admin.edit', compact('shipping'));
+        // return view('admin.edit', compact('shipping'));
+        return response()->json($shipping);
     }
     
     public function update(Request $request, $id)
     {
         $shipping = Shipping::findOrFail($id);
         $shipping->update($request->all());
-        return redirect()->route('admin.shippings')->with('success', 'Shipping data updated successfully');
+        // return redirect()->route('admin.shippings')->with('success', 'Shipping data updated successfully');
+        return response()->json([$shipping, 'message' => 'Shipping data updated successfully!']);
     }
 
     public function destroy($id)
     {
         Shipping::destroy($id);
-        return redirect()->route('admin.shippings')->with('success', 'Shipping information deleted successfully!');
+        // return redirect()->route('admin.shippings')->with('success', 'Shipping information deleted successfully!');
+        return response()->json(['message' => 'Shipping information deleted successfully!']);
     }
 
 }

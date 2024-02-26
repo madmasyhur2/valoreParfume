@@ -14,16 +14,17 @@ class HomeController extends Controller
     public function index() 
     {
         $provinces = $this->getProvince();
-
-        return view('home', [
-            'provinces' => $provinces
-        ]);
+        return response()->json($provinces, 200);
+        // return view('home', [
+        //     'provinces' => $provinces
+        // ]);
     }
 
     public function getProvince()
     {
         $provinces =  Province::all();
-        return $provinces;
+        return response()->json($provinces);
+        // return $provinces;
     }
 
     public function getRegency($province_id)
@@ -47,31 +48,31 @@ class HomeController extends Controller
 
 
     public function districts(Request $request)
-{
-    try {
-        $districts = District::with(['regency', 'regency.province'])
-        ->when($request->q, function ($query) use ($request) {
-            $query->where('name', 'LIKE', '%' . $request->q . '%')
-                ->orWhereHas('regency', function ($query) use ($request) {
-                    $query->where('name', 'LIKE', '%' . $request->q . '%');
-                })
-                ->orWhereHas('regency.province', function ($query) use ($request) {
-                    $query->where('name', 'LIKE', '%' . $request->q . '%');
-                });
-        })->get();
+    {
+        try {
+            $districts = District::with(['regency', 'regency.province'])
+            ->when($request->q, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->q . '%')
+                    ->orWhereHas('regency', function ($query) use ($request) {
+                        $query->where('name', 'LIKE', '%' . $request->q . '%');
+                    })
+                    ->orWhereHas('regency.province', function ($query) use ($request) {
+                        $query->where('name', 'LIKE', '%' . $request->q . '%');
+                    });
+            })->get();
 
-        $districts = $districts->map(function ($district) {
-            return [
-                'id' => $district->id,
-                'text' => $district->name . ' - ' . $district->regency->name . ' - ' . $district->regency->province->name,
-            ];
-        });
+            $districts = $districts->map(function ($district) {
+                return [
+                    'id' => $district->id,
+                    'text' => $district->name . ' - ' . $district->regency->name . ' - ' . $district->regency->province->name,
+                ];
+            });
 
-        return response()->json($districts);
-    } catch (\Throwable $th) {
-        return response()->json([
-            'message' => $th->getMessage()
-        ], 500);
+            return response()->json($districts);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => $th->getMessage()
+            ], 500);
+        }
     }
-}
 }

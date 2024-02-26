@@ -41,7 +41,14 @@ class ShippingController extends Controller
 
         $shipping = $this->storeShippingData($distance, $deliveryTime, $fee);
 
-        return view('shipping', compact('data', 'distance', 'fee', 'deliveryTime', 'shipping'));
+        // return view('shipping', compact('data', 'distance', 'fee', 'deliveryTime', 'shipping'));
+        return response()->json([
+            'data' => $data,
+            'distance' => $distance,
+            'fee' => $fee,
+            'deliveryTime' => $deliveryTime,
+            'shipping' => $shipping,
+        ]);        
     }
 
     public function storeShippingData($distance, $deliveryTime, $fee)
@@ -62,12 +69,12 @@ class ShippingController extends Controller
 
     public function calculateDistance($latitude1, $longitude1, $latitude2, $longitude2)
     {
-        $theta = $longitude1 - $longitude2; 
-        $distance = (sin(deg2rad($latitude1)) * sin(deg2rad($latitude2))) + (cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * cos(deg2rad($theta))); 
-        $distance = acos($distance); 
-        $distance = rad2deg($distance); 
-        $distance = $distance * 60 * 1.1515; 
-        $distance = $distance * 1.609344; 
+        $theta = $longitude1 - $longitude2;
+        $miles = (sin(deg2rad($latitude1)) * sin(deg2rad($latitude2))) + (cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * cos(deg2rad($theta)));
+        $miles = acos($miles);
+        $miles = rad2deg($miles);
+        $miles = $miles * 60 * 1.1515;
+        $distance = $miles * 1.609344; 
 
         return (round($distance,2)); 
     }
@@ -76,14 +83,15 @@ class ShippingController extends Controller
     {
         // Array untuk menentukan estimasi lama pengiriman berdasarkan jarak
         $deliveryTimeRanges = [
-            50 => 3,    // 1-50 km = 3 hari
-            75 => 4,
-            100 => 5,
-            150 => 6,
-            200 => 7,
-            250 => 8,
-            300 => 9,
-            350 => 10
+            100 => 2,    // 1-50 km = 3 hari
+            200 => 3,
+            300 => 4,
+            400 => 5,
+            500 => 6,
+            600 => 7,
+            700 => 8,
+            800 => 9,
+            900 => 10
         ];
 
         $deliveryTime = 10; 
@@ -94,9 +102,9 @@ class ShippingController extends Controller
             }
         }
 
-        $economy = ceil($deliveryTime * 5 / 3);
+        $economy = ceil($deliveryTime * 5 / 2);
         $regular = $deliveryTime;
-        $express = ceil($deliveryTime * 1 / 3);
+        $express = ceil($deliveryTime * 1 / 2);
     
         return compact('economy', 'regular', 'express');
     }
@@ -104,14 +112,14 @@ class ShippingController extends Controller
     public function calculateFee($weight, $distance)
     {   
         $pricePerKgRanges = [
-            100 => 10000,  // 1-100 km
-            200 => 15000,
-            300 => 20000,
-            400 => 25000,
-            500 => 30000
+            200 => 10000,  // 1-100 km
+            400 => 20000,
+            600 => 30000,
+            800 => 40000,
+            1000 => 50000
         ];
     
-        $pricePerKg = 30000;
+        $pricePerKg = 25000;
         foreach ($pricePerKgRanges as $range => $price) {
             if ($distance <= $range) {
                 $pricePerKg = $price;

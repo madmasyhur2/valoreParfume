@@ -15,37 +15,37 @@
         @method('PUT')
         <div class="mb-4">
             <label for="distance" class="block text-gray-700 text-sm font-bold mb-2">Distance (km):</label>
-            <input type="text" name="distance" id="distance" value="{{ $shipping->distance }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <input type="number" name="distance" id="distance" value="{{ $shipping->distance }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
         
         <div class="mb-4">
             <label for="delivery_time_economy" class="block text-gray-700 text-sm font-bold mb-2">Delivery Time Economy (hari):</label>
-            <input type="text" name="delivery_time_economy" id="delivery_time_economy" value="{{ $shipping->delivery_time_economy }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <input type="number" name="delivery_time_economy" id="delivery_time_economy" value="{{ $shipping->delivery_time_economy }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
         
         <div class="mb-4">
             <label for="delivery_time_regular" class="block text-gray-700 text-sm font-bold mb-2">Delivery Time Regular (hari):</label>
-            <input type="text" name="delivery_time_regular" id="delivery_time_regular" value="{{ $shipping->delivery_time_regular }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <input type="number" name="delivery_time_regular" id="delivery_time_regular" value="{{ $shipping->delivery_time_regular }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
         
         <div class="mb-4">
             <label for="delivery_time_express" class="block text-gray-700 text-sm font-bold mb-2">Delivery Time Express (hari):</label>
-            <input type="text" name="delivery_time_express" id="delivery_time_express" value="{{ $shipping->delivery_time_express }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <input type="number" name="delivery_time_express" id="delivery_time_express" value="{{ $shipping->delivery_time_express }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
         
         <div class="mb-4">
             <label for="fee_economy" class="block text-gray-700 text-sm font-bold mb-2">Fee Economy:</label>
-            <input type="text" name="fee_economy" id="fee_economy" value="{{ $shipping->fee_economy }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <input type="number" name="fee_economy" id="fee_economy" value="{{ $shipping->fee_economy }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
         
         <div class="mb-4">
             <label for="fee_regular" class="block text-gray-700 text-sm font-bold mb-2">Fee Regular:</label>
-            <input type="text" name="fee_regular" id="fee_regular" value="{{ $shipping->fee_regular }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <input type="number" name="fee_regular" id="fee_regular" value="{{ $shipping->fee_regular }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
         
         <div class="mb-4">
             <label for="fee_express" class="block text-gray-700 text-sm font-bold mb-2">Fee Express:</label>
-            <input type="text" name="fee_express" id="fee_express" value="{{ $shipping->fee_express }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <input type="number" name="fee_express" id="fee_express" value="{{ $shipping->fee_express }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
         
         <div class="flex items-center justify-between">

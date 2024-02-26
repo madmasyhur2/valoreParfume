@@ -28,5 +28,3 @@ Route::get('/shippings/admin', [AdminController::class, 'index'])->name('admin.s
 Route::get('/shippings/admin/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
 Route::put('/shippings/admin/{id}', [AdminController::class, 'update'])->name('admin.update');
 Route::delete('/shippings/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
-
-
