@@ -24,7 +24,10 @@ Route::get('/village/{district_id}', [HomeController::class, 'getVillage']);
 
 Route::post('/shippings', [ShippingController::class, 'index']);
 
-Route::get('/shippings/admin', [AdminController::class, 'index'])->name('admin.shippings');
-Route::get('/shippings/admin/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
-Route::put('/shippings/admin/{id}', [AdminController::class, 'update'])->name('admin.update');
-Route::delete('/shippings/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+// Route::get('/shippings/admin', [AdminController::class, 'index']);
+// Route::get('/shippings/admin/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+// Route::put('/shippings/admin/{id}', [AdminController::class, 'update'])->name('admin.update');
+// Route::delete('/shippings/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+
+Route::get('/datatable', [AdminController::class, 'dataTable']);
+Route::resource('/admin',AdminController::class);

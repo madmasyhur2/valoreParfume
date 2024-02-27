@@ -14,17 +14,17 @@ class HomeController extends Controller
     public function index() 
     {
         $provinces = $this->getProvince();
-        return response()->json($provinces, 200);
-        // return view('home', [
-        //     'provinces' => $provinces
-        // ]);
+        // return response()->json($provinces, 200);
+        return view('home', [
+            'provinces' => $provinces
+        ]);
     }
 
     public function getProvince()
     {
         $provinces =  Province::all();
-        return response()->json($provinces);
-        // return $provinces;
+        // return response()->json($provinces, 200);
+        return $provinces;
     }
 
     public function getRegency($province_id)

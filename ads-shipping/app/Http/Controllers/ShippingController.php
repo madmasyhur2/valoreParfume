@@ -41,14 +41,14 @@ class ShippingController extends Controller
 
         $shipping = $this->storeShippingData($distance, $deliveryTime, $fee);
 
-        // return view('shipping', compact('data', 'distance', 'fee', 'deliveryTime', 'shipping'));
-        return response()->json([
-            'data' => $data,
-            'distance' => $distance,
-            'fee' => $fee,
-            'deliveryTime' => $deliveryTime,
-            'shipping' => $shipping,
-        ]);        
+        return view('shipping', compact('data', 'distance', 'fee', 'deliveryTime', 'shipping'));
+        // return response()->json([
+        //     'data' => $data,
+        //     'distance' => $distance,
+        //     'fee' => $fee,
+        //     'deliveryTime' => $deliveryTime,
+        //     'shipping' => $shipping,
+        // ]);        
     }
 
     public function storeShippingData($distance, $deliveryTime, $fee)
@@ -113,13 +113,17 @@ class ShippingController extends Controller
     {   
         $pricePerKgRanges = [
             200 => 10000,  // 1-100 km
-            400 => 20000,
-            600 => 30000,
-            800 => 40000,
-            1000 => 50000
+            300 => 20000,
+            400 => 30000,
+            500 => 40000,
+            600 => 50000,
+            700 => 60000,
+            800 => 70000,
+            900 => 80000,
+            1000 => 90000,
         ];
     
-        $pricePerKg = 25000;
+        $pricePerKg = 10000;
         foreach ($pricePerKgRanges as $range => $price) {
             if ($distance <= $range) {
                 $pricePerKg = $price;

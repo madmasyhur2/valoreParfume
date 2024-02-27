@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cek Tarif ADS</title>
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    @vite('resources/css/app.css')
-</head>
-<body class="bg-gray-100">
+@extends('admin.layout.master')
 
+@section('styles')
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.css" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@endsection
+
+@section('content')
     <div class="w-full max-w-7xl mx-auto p-8">
         <h1 class="text-2xl font-bold text-center mb-8">Shipping Information</h1>
         @if (session()->has('success'))
@@ -60,12 +56,138 @@
                 @endforeach
             </tbody>
         </table>
-        <a href="/" class="absolute bottom-4 left-4 bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded shadow flex items-center">
-            <span class="mr-2">Kembali ke Halaman Utama</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-            </svg>
-        </a>
+        {{-- <div class="container py-3">
+            <div class="row">
+                <table class="table" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">city</th>
+                            <th scope="col">Province</th>
+                            <th scope="col" class="text-end">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div> --}}
+        <button class="absolute bottom-4 left-4 bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-xl shadow flex items-center">
+            <a href="/" >
+                <span class="mr-2">Kembali ke Halaman Utama</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+            </a>
+        </button>
     </div>
-</body>
-</html>
+    @endsection
+
+    @push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.datatables.net/2.0.0/js/dataTables.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: '/datatable',
+                },
+                columns: [
+                    { 
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'name',
+                        name: 'name',
+                        width: '20%',
+                        orderable: true,
+                        serchable: true
+                    },
+                    {
+                        data: 'regency.name',
+                        name: 'regency.name',
+                        width: '20%',
+                        orderable: true,
+                        serchable: true
+                    },
+                    {
+                        data: 'regency.province.name',
+                        name: 'regency.province.name',
+                        width: '20%',
+                        orderable: true,
+                        serchable: true
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        width: '10%',
+                        orderable: false,
+                        serchable: false
+                    }
+                ],
+                columnDefs: [
+                    {
+                        "targets": [ 0 ],
+                        "visible": false,
+                        "searchable": false
+                    }                     
+                ],
+                order: [[ 0, "desc" ]]
+            });
+        });
+    </script>
+
+    {{-- Sweet Alert --}}
+    <script>
+        $(document).on('click', '.deleteConfirm', function () {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = $(this).data('id');
+                    var url = "{{ route('admin.index', ':id') }}";
+                    $.ajax({
+                        url: url.replace(':id', id),
+                        type: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function (data) {
+                            Swal.fire({
+                                title: 'Success',
+                                text: data.message,
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                                timer: 1000,
+                                timerProgressBar: true,
+                            });
+                            $('#dataTable').DataTable().ajax.reload();
+                        },
+                        error: function (data) {
+                            Swal.fire({
+                                title: 'Error',
+                                text: data.message,
+                                icon: 'error',
+                                confirmButtonText: 'OK',
+                                timer: 3000,
+                                timerProgressBar: true,
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    @endpush
