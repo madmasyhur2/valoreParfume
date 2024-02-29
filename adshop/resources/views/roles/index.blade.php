@@ -26,9 +26,11 @@
                                 <th scope="row">{{ ++$key }}</th>
                                 <td>{{ $item['name'] }}</td>
                                 <td>
-                                    @foreach ($item->permissions as $permission)
-                                    <span class="badge bg-primary">{{ $permission['name'] }}</span>
-                                    @endforeach
+                                    @if ($item['permissions'])
+                                        @foreach ($item['permissions'] as $permission)
+                                            <span class="badge bg-primary">{{ $permission }}</span>
+                                        @endforeach
+                                    @endif
                                 </td>
                                 <td>
                                     <a href="{{ route('roles.edit', $item['id']) }}" class="btn btn-primary">Edit</a>

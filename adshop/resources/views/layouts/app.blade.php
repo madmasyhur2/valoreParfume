@@ -49,6 +49,12 @@
                                 </li>
                             @endif
                         @else
+                        {{-- Link for admin and seller only --}}
+                            @hasanyrole('Admin|Seller')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('roles.index') }}">{{ __('Roles') }}</a>
+                            </li>
+                            @endhasanyrole
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

@@ -24,8 +24,11 @@
                         <div class="col-md-12">
                             <label for="permissions" class="form-label">Permissions</label>
                             <select id="permissions" name="permissions[]" class="form-select" multiple>
-                            @foreach ($permissions as $permission)
-                            <option value="{{ $permission->name }}" {{ in_array($permission->id, $role->permissions->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $permission->name }}</option>
+                            @foreach ($permission as $permissions)
+                                @php
+                                    $selected = $role->permissions ? in_array($permissions->id, $role->permissions->pluck('id')->toArray()) : false;
+                                @endphp
+                                <option value="{{ $permissions->name }}" {{ $selected ? 'selected' : '' }}>{{ $permissions->name }}</option>
                             @endforeach
                             </select>
                         </div>
@@ -40,14 +43,14 @@
 </div>
 @endsection
 @push('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#permissions').select2({
-            placeholder: "Select permissions",
-            allowClear: true
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#permissions').select2({
+                placeholder: "Select permissions",
+                allowClear: true
+            });
         });
-    });
-</script>
+    </script>
 @endpush

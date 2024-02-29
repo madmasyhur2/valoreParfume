@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 use App\Models\Permission;
+use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
@@ -46,7 +47,7 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Role $role)
+    public function edit($role)
     {
         $role = Role::find($role);
         $permission = Permission::all();
@@ -56,9 +57,10 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRoleRequest $request, Role $role)
+    public function update(Request $request, $role)
     {
         $role = Role::find($role);
+        $role->name = $request->name;
         $role->syncPermissions($request->permissions);
         return back()->with('status', 'Role updated');
     }
